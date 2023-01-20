@@ -18,30 +18,8 @@ btn.addEventListener('click', () => {
     }).reveal(1500);
 
     if (password.elements[0].value) {
-        const url = 'https://php-apis.000webhostapp.com/api/passwords/md5Generator.php?text=' + password.elements[0].value;
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            setTimeout(() => {
-                md5baff.stop();
-                md5.innerText = data.md5;
-            }, 300);
-        })
-        .catch(error => console.error(error))
-        
-        // const url = 'https://php-apis.000webhostapp.com/api/routes/passwordRoutes.php';
-        // const data = {
-        //     action: 'md5Generator',
-        //     text: password.elements[0].value
-        // }
-        
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
+        // const url = 'https://php-apis.000webhostapp.com/api/passwords/md5Generator.php?text=' + password.elements[0].value;
+        // fetch(url)
         // .then(response => response.json())
         // .then(data => {
         //     setTimeout(() => {
@@ -50,6 +28,28 @@ btn.addEventListener('click', () => {
         //     }, 300);
         // })
         // .catch(error => console.error(error))
+        
+        // const url = 'https://php-apis.000webhostapp.com/api/routes/passwordRoutes.php';
+        const data = {
+            action: 'md5Generator',
+            text: password.elements[0].value
+        }
+        
+        fetch('https://php-apis.000webhostapp.com/api/routes/passwordRoutes.php', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setTimeout(() => {
+                md5baff.stop();
+                md5.innerText = data.md5;
+            }, 300);
+        })
+        .catch(error => console.error(error))
     }
 
     document.getSelection().removeAllRanges();
