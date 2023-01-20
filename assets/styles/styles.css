@@ -70,3 +70,13 @@ h2.show {
     box-shadow: none;
     background-color: rgba(242, 85, 91, .25);
 }
+
+@media only screen and (max-width: 450px) {
+    .Box {
+        width: 350px;
+    }
+
+    .btn {
+        min-width: 250px;
+    }
+  }
